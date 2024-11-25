@@ -35,7 +35,7 @@ export default function Profile() {
           <div className="profileTxt">
             <div className="skillList">
               <span className="skillImg">
-                <img src="img/html5.png" alt="html5" value="html5" />
+                <img src={`${process.env.PUBLIC_URL}/img/html5.png`} alt="html5" />
                 <span className="score"></span>
               </span>
               <span className="skillImg">
@@ -43,15 +43,15 @@ export default function Profile() {
                 <span className="score"></span>
               </span>
               <span className="skillImg">
-                <img src="img/js.png" alt="자바스크립트 ES6" />
+                <img src={`${process.env.PUBLIC_URL}/img/js.png`} alt="js" />
                 <span className="score"></span>
               </span>
               <span className="skillImg">
-                <img src="img/jq.png" alt="제이쿼리" />
+                <img src={`${process.env.PUBLIC_URL}/img/jq.png`} alt="제이쿼리" />
                 <span className="score"></span>
               </span>
               <span className="skillImg">
-                <img src="img/react.png" alt="리액트" />
+                <img src={`${process.env.PUBLIC_URL}/img/react.png`} alt="react" />
                 <span className="score"></span>
               </span>
               <span className="skillImg">
@@ -60,9 +60,10 @@ export default function Profile() {
                   alt="FireBase"
                   className="firebaseImg"
                 />
+                <img className="firebaseImg" src={`${process.env.PUBLIC_URL}/img/firebaselogo.png`} alt="파이어베이스" />
               </span>
               <span className="skillImg">
-                <img src="img/git.png" alt="깃허브" />
+                <img src={`${process.env.PUBLIC_URL}/img/git.png`} alt="깃허브" />
               </span>
             </div>
           </div>
