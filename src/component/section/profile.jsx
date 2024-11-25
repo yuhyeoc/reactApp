@@ -39,7 +39,7 @@ export default function Profile() {
                 <span className="score"></span>
               </span>
               <span className="skillImg">
-                <img src="img/css.png" alt="CSS3" />
+                <img src={`${process.env.PUBLIC_URL}/img/css.png`} alt="CSS3" />
                 <span className="score"></span>
               </span>
               <span className="skillImg">
