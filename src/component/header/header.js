@@ -73,7 +73,7 @@ function Header(props) {
             e.preventDefault();
           }}
         >
-          <Link className="hd_logo" to="/">
+          <Link className="hd_logo" to="/reactApp">
             {/* <img src="img/react.png" alt="리액트" /> */}
             Portfolio
             {/* <img src="img/doglogo.png"></img> */}
