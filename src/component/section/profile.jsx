@@ -51,30 +51,30 @@ export default function Profile() {
                 <span className="score"></span>
               </span>
               <span className="skillImg">
-                <img src="img/css.png" alt="CSS3" />
+                <img src="/img/css.png" alt="CSS3" />
                 <span className="score"></span>
               </span>
               <span className="skillImg">
-                <img src="img/js.png" alt="자바스크립트 ES6" />
+                <img src="/img/js.png" alt="자바스크립트 ES6" />
                 <span className="score"></span>
               </span>
               <span className="skillImg">
-                <img src="img/jq.png" alt="제이쿼리" />
+                <img src="/img/jq.png" alt="제이쿼리" />
                 <span className="score"></span>
               </span>
               <span className="skillImg">
-                <img src="img/react.png" alt="리액트" />
+                <img src="/img/react.png" alt="리액트" />
                 <span className="score"></span>
               </span>
               <span className="skillImg">
                 <img
-                  src="img/firebaselogo.png"
+                  src="/img/firebaselogo.png"
                   alt="FireBase"
                   className="firebaseImg"
                 />
               </span>
               <span className="skillImg">
-                <img src="img/git.png" alt="깃" />
+                <img src="/img/git.png" alt="깃허브" />
               </span>
             </div>
           </div>
