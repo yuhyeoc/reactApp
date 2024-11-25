@@ -1,0 +1,7 @@
+.ScssComponent {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+.ScssComponent .box {
+  margin-bottom: 24px;
+}

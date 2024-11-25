@@ -1,0 +1,11 @@
+.tabContainer {
+    color: red;
+}
+.is-active {
+    color: red;
+    display: block;
+}
+.tabName {
+    line-height: 1.8;
+    border: 1px solid beige;
+}

@@ -1,0 +1,30 @@
+@charset "UTF-8";
+/* 자동으로 고유해질 것이믈 흔히 사용되는 단어를 클래스 이름으로 마음대로 사용가능 */
+/* .module.css 확장자로 저장시 CSS Module 적용 */
+.wrapper {
+  background: #000;
+  padding: 1rem;
+  color: white;
+  font-size: 2rem;
+}
+.wrapper .titleSize {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.8;
+}
+.wrapper.inverted {
+  color: black;
+  background: #333333;
+  border: 1px solid whitesmoke;
+}
+
+/* 글로벌 CSS를 작성하고 싶다면 */
+:global .something {
+  font-weight: 800;
+  color: aqua;
+}
+:global .subTitle {
+  font-size: 16px;
+  font-weight: 500;
+  background: beige;
+}/*# sourceMappingURL=CSSModule.module.css.map */
