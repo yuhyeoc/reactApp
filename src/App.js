@@ -37,15 +37,15 @@ import CreatePost from "./component/createPost";
 export const App = () => {
   // 헤더 props
   const headerMenu = [
-    { id: 1, title: "프로필", linkTo: "/reactApp/profile", subNav: "프로필" },
+    { id: 1, title: "프로필", linkTo: "/profile", subNav: "프로필" },
     {
       id: 2,
       title: "서울 대기현황",
-      linkTo: "/reactApp/seouldust",
+      linkTo: "/seouldust",
       subNav: "서울 대기현황",
     },
-    { id: 3, title: "CRUD(firebase)", linkTo: "/reactApp/board", subNav: "CRUD기능구현" },
-    { id: 4, title: "ToDo List", linkTo: "/reactApp/todo", subNav: "ToDoList" },
+    { id: 3, title: "CRUD(firebase)", linkTo: "/board", subNav: "CRUD기능구현" },
+    { id: 4, title: "ToDo List", linkTo: "/todo", subNav: "ToDoList" },
   ];
 
   return (
@@ -56,11 +56,7 @@ export const App = () => {
           <Routes>
             <Route path="/" element={<Profile />} />
             <Route path="/reactApp" element={<Profile />} />
-            <Route path="/react_test" element={<Profile />} />
             <Route path="/jsx" element={<TabMenu />} />
-            <Route path="/props" element={<SecTest />} />
-            <Route path="/useref" element={<RefEx />} />
-            <Route path="/useeffect" element={<EmailStateForm />} />
             <Route path="/testcontext" element={<TestContext />} />
             <Route path="/seouldust" element={<DustList />} />
             <Route path="/todo" element={<TodoList />} />
