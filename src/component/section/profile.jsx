@@ -47,7 +47,7 @@ export default function Profile() {
           <div className="profileTxt">
             <div className="skillList">
               <span className="skillImg">
-                <img src="img/html5.png" alt="html5" value="html5" />
+                <img src="/img/html5.png" alt="html5" value="html5" />
                 <span className="score"></span>
               </span>
               <span className="skillImg">
