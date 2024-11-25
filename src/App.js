@@ -55,6 +55,7 @@ export const App = () => {
           <Header headerMenu={headerMenu} />
           <Routes>
             <Route path="/" element={<Profile />} />
+            <Route path="/reactApp" element={<Profile />} />
             <Route path="/react_test" element={<Profile />} />
             <Route path="/jsx" element={<TabMenu />} />
             <Route path="/props" element={<SecTest />} />
