@@ -7,18 +7,6 @@ const ProfileCss = styled.div`
   color: #333;
   padding-top: 56px;
 `;
-const ProfileCssH2 = styled.h2`
-  margin-bottom: 36px;
-  font-size: ${({ theme }) => theme.fontSizeObj.title};
-`;
-const ProfileCssH3 = styled.p`
-  font-size: ${({ theme }) => theme.fontSizeObj.subtitle};
-  margin-bottom: 18px;
-`;
-const ProfileCssP = styled.h3`
-    font-size: ${({ theme }) => theme.fontSizeObj.paragraph};\
-    line-height: 2;
-`;
 
 export default function Profile() {
   return (
@@ -47,34 +35,34 @@ export default function Profile() {
           <div className="profileTxt">
             <div className="skillList">
               <span className="skillImg">
-                <img src="/img/html5.png" alt="html5" value="html5" />
+                <img src="img/html5.png" alt="html5" value="html5" />
                 <span className="score"></span>
               </span>
               <span className="skillImg">
-                <img src="/img/css.png" alt="CSS3" />
+                <img src="img/css.png" alt="CSS3" />
                 <span className="score"></span>
               </span>
               <span className="skillImg">
-                <img src="/img/js.png" alt="자바스크립트 ES6" />
+                <img src="img/js.png" alt="자바스크립트 ES6" />
                 <span className="score"></span>
               </span>
               <span className="skillImg">
-                <img src="/img/jq.png" alt="제이쿼리" />
+                <img src="img/jq.png" alt="제이쿼리" />
                 <span className="score"></span>
               </span>
               <span className="skillImg">
-                <img src="/img/react.png" alt="리액트" />
+                <img src="img/react.png" alt="리액트" />
                 <span className="score"></span>
               </span>
               <span className="skillImg">
                 <img
-                  src="/img/firebaselogo.png"
+                  src="img/firebaselogo.png"
                   alt="FireBase"
                   className="firebaseImg"
                 />
               </span>
               <span className="skillImg">
-                <img src="/img/git.png" alt="깃허브" />
+                <img src="img/git.png" alt="깃허브" />
               </span>
             </div>
           </div>
