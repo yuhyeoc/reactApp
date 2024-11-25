@@ -1,12 +1,12 @@
 {
-  "homepage": "./",
+  "homepage": "https://yuhyeoc.github.io/reactApp",
   "name": "test",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
-    "@fortawesome/free-brands-svg-icons": "^6.3.0",
+    "@fortawesome/free-brands-svg-icons": "^6.3.0",git push origin gh-pages --force
     "@fortawesome/free-regular-svg-icons": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
