@@ -1106,6 +1106,53 @@ footer .footerWrap .visitorInfo {
   padding: 8px;
   line-height: 1;
 }
+/* board */
+.boardContainer {
+  .boardSection {
+    width: 80%;
+    p.title {font-size: 24px; text-align: left; margin-bottom: 1rem;}
+    .writeWrap{
+      button {
+        height: 32px;
+        padding: 0px 32px;
+        line-height: 2;
+      }
+      button.writeBtn {width: 150px;}
+      .formWrap {
+        display: block;
+        width: 100%;
+        form {
+          display: block;
+          input, 
+          textarea {
+            display: inline-block;
+            width: 50%;
+            border-radius: 4px;
+            margin: 0px;
+          }
+          input {margin-bottom: 12px ;}
+          textarea { height: 96px; }
+          label { margin-right: 10px;}
+          div:nth-child(2) { }
+          
+        }
+      }
+    }
+  
+    .listWrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      width: 100%;
+      .boardList {
+        width: calc(80% / 3);
+        background: #e2f1ff;
+        box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+      }
+    }
+
+  }
+}
 
 /* 반응형 */
 @media screen and (min-width: 981px) {
