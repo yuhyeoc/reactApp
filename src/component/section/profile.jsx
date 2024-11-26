@@ -55,11 +55,6 @@ export default function Profile() {
                 <span className="score"></span>
               </span>
               <span className="skillImg">
-                <img
-                  src="img/firebaselogo.png"
-                  alt="FireBase"
-                  className="firebaseImg"
-                />
                 <img className="firebaseImg" src={`${process.env.PUBLIC_URL}/img/firebaselogo.png`} alt="파이어베이스" />
               </span>
               <span className="skillImg">
