@@ -1238,6 +1238,12 @@ footer .footerWrap .visitorInfo {
         width: calc(80% / 3);
         background: #e2f1ff;
         box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+        button {
+          padding: 4px;
+          background: none;
+          color: #333;
+          border: 1px solid #333;
+        }
       }
     }
 
