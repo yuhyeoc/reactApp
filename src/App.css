@@ -51,6 +51,38 @@
   color: #61dafb;
 }
 
+.button-13 {
+  background-color: #fff;
+  border: 1px solid #d5d9d9;
+  border-radius: 8px;
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  box-sizing: border-box;
+  color: #0f1111;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Amazon Ember",sans-serif;
+  font-size: 13px;
+  line-height: 29px;
+  padding: 0 10px 0 11px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: 100px;
+}
+
+.button-13:hover {
+  background-color: #f7fafa;
+}
+
+.button-13:focus {
+  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+  outline: 0;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -1032,7 +1064,7 @@ footer .footerWrap .visitorInfo {
   background-size: contain;
   background-repeat: no-repeat;
 }
-.dustUl li div .apiValueWrap .emojiGrade1 {
+/* .dustUl li div .apiValueWrap .emojiGrade1 {
   background-image: url(../public/img/1grade.png);
 }
 .dustUl li div .apiValueWrap .emojiGrade2 {
@@ -1043,7 +1075,7 @@ footer .footerWrap .visitorInfo {
 }
 .dustUl li div .apiValueWrap .emojiGrade4 {
   background-image: url(../public/img/4grade.png);
-}
+} */
 
 /* 등급 */
 .dustUl li .gradeWrap .gradeTxt {
@@ -1125,12 +1157,75 @@ footer .footerWrap .visitorInfo {
             border-radius: 4px;
             margin: 0px;
           }
-          input {margin-bottom: 12px ;}
+          input {
+            margin-bottom: 12px;
+            border: none;
+            border-bottom: 1px solid;
+            border-radius: 0px;
+            background: none!important;
+            text-align: left;
+          }
           textarea { height: 96px; }
-          label { margin-right: 10px;}
+          label { display: inline-block; margin-right: 10px;}
           div:nth-child(2) { }
           
         }
+        .userInput {
+          display: flex;
+          margin-top: 40px;
+          margin-bottom: 1rem;
+          text-align: left;
+          .userId {
+            width: 150px;
+            input {
+              width: 100%;
+            }
+          }
+          .userPw { margin-left: 10px;}
+          input {
+            background-color: transparent;
+          }
+        }
+        .writeInput {
+          text-align: left;
+          margin-bottom: 40px;
+        }
+        .submitBtnWrap {
+          text-align: left;
+          .button-13 {
+            background-color: #fff;
+            border: 1px solid #d5d9d9;
+            border-radius: 8px;
+            box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+            box-sizing: border-box;
+            color: #0f1111;
+            cursor: pointer;
+            display: inline-block;
+            font-family: "Amazon Ember",sans-serif;
+            font-size: 13px;
+            line-height: 29px;
+            padding: 0 10px 0 11px;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: middle;
+            width: 100px;
+          }
+
+          .button-13:hover {
+            background-color: #f7fafa;
+          }
+
+          .button-13:focus {
+            border-color: #008296;
+            box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+            outline: 0;
+          }
+        }
+        .cancelBtn { background: #f2f2f2; color: #0f1111; }
       }
     }
   
