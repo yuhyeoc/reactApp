@@ -61,9 +61,10 @@ const CreatePost = ({ onCancel }) => {
         </div>
         <div className="writeInput">
           <div>
-            <label>제목</label>
+            <label for="titleInput">제목</label>
             <input
               type="text"
+              id="titleInput"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required

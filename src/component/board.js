@@ -57,11 +57,18 @@ const Board = () => {
               {posts.map((post) => (
                 <div className="boardList" key={post.id} style={{ padding: "10px", margin: "16px 0" }}>
                   <h2>{post.title}</h2>
+                  <div className="postInfo">
+                    <span>작성자: {post.authorName}</span>
+                    <div>
+                      <button onClick={() => handleDelete(post.id)} style={{ marginRight: "8px" }}>
+                        삭제
+                      </button>
+                      <button type="button">
+                        수정
+                      </button>
+                    </div>
+                  </div>
                   <p>{post.content}</p>
-                  <small>작성자: {post.authorName}</small>
-                  <button onClick={() => handleDelete(post.id)} style={{ marginLeft: "10px" }}>
-                    삭제
-                  </button>
                 </div>
               ))}
             </div>
