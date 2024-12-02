@@ -41,7 +41,7 @@ const Board = () => {
     <ThemeProvider theme={theme}>
       <ProfileCss>
         <div className="profileWrap boardContainer">
-          <h3 className="profileH3">게시판</h3>
+          <h3 className="profileH3">메모장</h3>
 
           <div className="boardSection">
             <p className="title">Firebase DB를 사용한 CRUD 구현입니다.</p>
