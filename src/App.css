@@ -1138,13 +1138,13 @@ footer .footerWrap .visitorInfo {
   .boardSection {
     width: 80%;
     p.title {font-size: 24px; text-align: left; margin-bottom: 1rem;}
+    button.writeBtn {width: 100px; margin-left: 16px;}
     .writeWrap{
       button {
         height: 32px;
         padding: 0px 32px;
         line-height: 2;
       }
-      button.writeBtn {width: 150px;}
       .formWrap {
         display: block;
         width: 100%;

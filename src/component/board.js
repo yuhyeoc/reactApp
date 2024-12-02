@@ -42,14 +42,13 @@ const Board = () => {
       <ProfileCss>
         <div className="profileWrap boardContainer">
           <h3 className="profileH3">메모장</h3>
-
           <div className="boardSection">
-            <p className="title">Firebase DB를 사용한 CRUD 구현입니다.</p>
-            <div className="writeWrap">
+            <p className="title">Firebase DB를 사용한 CRUD 구현입니다.
               <button className="writeBtn button-13" onClick={() => setShowCreatePost((prev) => !prev)}>
                 {showCreatePost ? "취소" : "글쓰기"}
               </button>
-
+            </p>
+            <div className="writeWrap">
               {showCreatePost && <CreatePost onCancel={() => setShowCreatePost(false)} />}
             </div>
 
