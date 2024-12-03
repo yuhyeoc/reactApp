@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { collection, query, onSnapshot, deleteDoc, doc } from "firebase/firestore";
+import React, { useState, useEffect, Fragment } from "react";
+import { collection, query, onSnapshot, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import CreatePost from "./createPost";
 import styled, { ThemeProvider } from "styled-components";
@@ -8,6 +8,9 @@ import theme from "./styles/Tagged";
 const Board = () => {
   const [posts, setPosts] = useState([]);
   const [showCreatePost, setShowCreatePost] = useState(false);
+  const [editingPostId, setEditingPostId] = useState(null); // 현재 수정 중인 게시글 ID
+  const [editTitle, setEditTitle] = useState('');
+  const [editContent, setEditContent] = useState('');
 
   useEffect(() => {
     const q = query(collection(db, "posts"));
@@ -37,6 +40,40 @@ const Board = () => {
     }
   };
 
+  const enableEditMode = (post) => {
+    setEditingPostId(post.id);
+    setEditTitle(post.title);
+    setEditContent(post.content);
+  };
+
+  const handleUpdate = async () => {
+    if (!editTitle || !editContent) {
+      alert("제목과 내용을 입력해주세요.");
+      return;
+    }
+  
+    const password = prompt("게시글의 비밀번호를 입력하세요:");
+    const post = posts.find((post) => post.id === editingPostId);
+  
+    if (post && post.password === password) {
+      try {
+        const postRef = doc(db, "posts", editingPostId);
+        await updateDoc(postRef, {
+          title: editTitle,
+          content: editContent,
+          updatedAt: new Date().toISOString(),
+        });
+  
+        alert("게시글이 수정되었습니다.");
+        setEditingPostId(null);
+      } catch (e) {
+        console.error("Error updating document: ", e);
+      }
+    } else {
+      alert("비밀번호가 일치하지 않습니다.");
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <ProfileCss>
@@ -54,21 +91,43 @@ const Board = () => {
 
             <div className="listWrap">
               {posts.map((post) => (
-                <div className="boardList" key={post.id} style={{ padding: "10px", margin: "16px 0" }}>
-                  <h2>{post.title}</h2>
-                  <div className="postInfo">
-                    <span>작성자: {post.authorName}</span>
-                    <div>
-                      <button onClick={() => handleDelete(post.id)} style={{ marginRight: "8px" }}>
-                        삭제
-                      </button>
-                      <button type="button">
-                        수정
-                      </button>
-                    </div>
+                <div key={post.id} className="boardList" style={{ padding: "10px", margin: "16px 0" }}>
+                {editingPostId === post.id ? (
+                  <div className="editInput">
+                    <input
+                      type="text"
+                      value={editTitle}
+                      onChange={(e) => setEditTitle(e.target.value)}
+                      placeholder="제목을 입력하세요"
+                    />
+                    <textarea
+                      value={editContent}
+                      onChange={(e) => setEditContent(e.target.value)}
+                      placeholder="내용을 입력하세요"
+                    ></textarea>
+                    <button onClick={handleUpdate} style={{ marginRight: "8px" }}>
+                      저장
+                    </button>
+                    <button onClick={() => setEditingPostId(null)}>취소</button>
                   </div>
-                  <p>{post.content}</p>
-                </div>
+                ) : (
+                  <Fragment>
+                    <h2>{post.title}</h2>
+                    <div className="postInfo">
+                      <span>작성자: {post.authorName}</span>
+                      <div>
+                        <button onClick={() => handleDelete(post.id)} style={{ marginRight: "8px" }}>
+                          삭제
+                        </button>
+                        <button type="button" onClick={() => enableEditMode(post)}>
+                          수정
+                        </button>
+                      </div>
+                    </div>
+                    <p>{post.content}</p>
+                  </Fragment>
+                )}
+              </div>
               ))}
             </div>
           </div>

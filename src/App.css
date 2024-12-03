@@ -1254,6 +1254,19 @@ footer .footerWrap .visitorInfo {
           color: gray;
           font-size: 14px;
         }
+        .editInput {
+          input {
+            margin-bottom: 12px;
+            border: none;
+            border-bottom: 1px solid;
+            border-radius: 0px;
+            background: #fff;
+            text-align: left;
+          }
+          textarea {
+            min-height: 72px;
+          }
+        }
       }
     }
 
