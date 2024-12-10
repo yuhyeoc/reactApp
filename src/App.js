@@ -31,7 +31,7 @@ import Select from "./component/section/select";
 import Profile from "./component/section/profile";
 import DustList from "./component/section/dustList";
 import TodoList from "./component/section/TodoList";
-import Board from "./component/board";
+import Board from "./component/board.tsx";
 import CreatePost from "./component/createPost";
 
 export const App = () => {
