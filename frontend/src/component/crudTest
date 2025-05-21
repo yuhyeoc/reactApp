@@ -1,0 +1,18 @@
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "./firebase";
+
+const addTestData = async () => {
+  try {
+    const docRef = await addDoc(collection(db, "posts"), {
+      title: "테스트 게시물",
+      content: "이것은 테스트 콘텐츠입니다.",
+      author: "테스터",
+      timestamp: new Date(),
+    });
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+};
+
+addTestData();

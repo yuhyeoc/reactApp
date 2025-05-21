@@ -1,0 +1,82 @@
+.NavList {
+  display: flex;
+  text-align: left;
+  max-width: 1920px;
+  width: 100%;
+  height: 100%;
+  padding: 20px 10px;
+  margin-bottom: 96px;
+  border: 1px solid;
+}
+.NavTitle {
+display: block;
+width: 100%;
+}
+.NavList .NavTitleWrap>li>a {
+  color: #333;
+}
+.NavCon {
+  width: 100%;
+}
+.NavCon>h2 {
+  font-size: 400px;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 18px 0px;
+}
+.NavCon>h2:nth-child(1)>span {
+  display: inline-block;
+  vertical-align: middle;
+  width: 28px;
+  height: 28px;
+  background: url(https://acebiome.com/data/skin/respon_default/images/skin/icon_cate_arrow.png);
+  background-position: 50% 40%;
+  background-repeat: no-repeat;
+  background-size: auto 14px;
+}
+.NavCon>h2:nth-child(1) {
+  font-size: 20px;
+  padding-bottom: 16px 0px 14px;
+}
+
+.NavList .NavTitleWrap>li {
+  padding: 8px 0px;
+}
+.NavList .NavTitleWrap>li>a {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+  line-height: 38px;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 400;
+}
+/* Aside Title 기본클래스 */
+.NavList .NavTitleWrap {
+  width: 500px;
+  transition: 0.5s;
+  transform: matrix(1, 0, 0, 1, 40, 0);
+}
+/* Aside Title 클래스추가 */
+.NavList .moveTitleWrap {
+  width: 100%;
+  transition: 0.5s;
+  opacity: 0;
+  transform: matrix(1, 0, 0, 1, -90, 0);
+}
+/* Aside SubNav */
+/* Aside SubNav 기본클래스 */
+.NavList .NavCon {
+  width: 100%;
+  opacity: 0;
+  transform: matrix(1, 0, 0, 1, 50, 0);
+  transition: 0.5s;
+}
+/* Aside SubNav 클래스추가 */
+.NavList .NavConActive {
+  opacity: 1;
+  transition: 0.5s;
+  transform: matrix(1, 0, 0, 1, -250, 0);
+}
+
+

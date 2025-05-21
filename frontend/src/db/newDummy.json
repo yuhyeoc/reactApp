@@ -1,0 +1,44 @@
+{
+  "days": [
+    { "id": 1, "day": 1 },
+    { "id": 2, "day": 2 },
+    { "id": 3, "day": 3 }
+  ],
+  "words": [
+    {
+      "id": 1,
+      "day": 1,
+      "eng": "book",
+      "kor": "책",
+      "isDone": false
+    },
+    {
+      "id": 2,
+      "day": 3,
+      "eng": "apple",
+      "kor": "사과",
+      "isDone": false
+    },
+    {
+      "id": 3,
+      "day": 2,
+      "eng": "monitor",
+      "kor": "모니터",
+      "isDone": false
+    },
+    {
+      "id": 4,
+      "day": 1,
+      "eng": "city",
+      "kor": "도시",
+      "isDone": false
+    },
+    {
+      "id": 5,
+      "day": 2,
+      "eng": "coffee",
+      "kor": "커피",
+      "isDone": false
+    }
+  ]
+}

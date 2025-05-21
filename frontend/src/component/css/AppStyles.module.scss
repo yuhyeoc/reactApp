@@ -1,0 +1,21 @@
+#root {
+  max-width: 1440px;
+  min-height: 100vh;
+  text-align: center;
+  color: #333333;
+  margin: auto;
+  font-family: "Noto Sans KR", sans-serif;
+  background: #eaeaea;
+  /* 포지션 */
+  position: relative;
+  .headerCustom {
+    width: 100vw;
+  }
+  .secWrapper {
+    width: 100vw;
+  }
+
+  .dustUl {
+    margin-top: 72px;
+  }
+}
