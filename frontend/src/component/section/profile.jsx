@@ -41,15 +41,7 @@ export default function Profile() {
                 <span className="score"></span>
               </span>
               <span className="skillImg">
-                <img src={`${process.env.PUBLIC_URL}/img/css.png`} alt="CSS3" />
-                <span className="score"></span>
-              </span>
-              <span className="skillImg">
                 <img src={`${process.env.PUBLIC_URL}/img/js.png`} alt="js" />
-                <span className="score"></span>
-              </span>
-              <span className="skillImg">
-                <img src={`${process.env.PUBLIC_URL}/img/jq.png`} alt="제이쿼리" />
                 <span className="score"></span>
               </span>
               <span className="skillImg">
@@ -57,11 +49,28 @@ export default function Profile() {
                 <span className="score"></span>
               </span>
               <span className="skillImg">
-                <img className="firebaseImg" src={`${process.env.PUBLIC_URL}/img/firebaselogo.png`} alt="파이어베이스" />
+                <img src={`${process.env.PUBLIC_URL}/img/tailwind-css.png`} alt="CSS3" />
+                <span className="score"></span>
+              </span>
+              {/* <span className="skillImg">
+                <img src={`${process.env.PUBLIC_URL}/img/jq.png`} alt="제이쿼리" />
+                <span className="score"></span>
+              </span> */}
+              <span className="skillImg">
+                <img className="firebaseImg" src={`${process.env.PUBLIC_URL}/img/logo-fastapi.png`} alt="fast API" />
+              </span>
+              <span className="skillImg">
+                <img className="firebaseImg" src={`${process.env.PUBLIC_URL}/img/sqllite.png`} alt="SQL LITE" />
+              </span>
+              <span className="skillImg">
+                <img className="firebaseImg" src={`${process.env.PUBLIC_URL}/img/docker.png`} alt="Docker" />
               </span>
               <span className="skillImg">
                 <img src={`${process.env.PUBLIC_URL}/img/git.png`} alt="깃허브" />
               </span>
+              {/* <span className="skillImg">
+                <img src={`${process.env.PUBLIC_URL}/img/gpt.png`} alt="gpt" />
+              </span> */}
             </div>
           </div>
         </div>

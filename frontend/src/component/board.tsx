@@ -1,232 +1,202 @@
+// frontend/src/pages/board.tsx
 import React, { useState, useEffect, Fragment } from "react";
-import { collection, query, onSnapshot, deleteDoc, doc, updateDoc } from "firebase/firestore";
-import { db } from "../firebase";
-import CreatePost from "./createPost";
-import styled, { ThemeProvider } from "styled-components";
-import theme from "./styles/Tagged";
+import axios from "axios";
+
 
 interface Post {
-  id: string;
+  id: number;
   title: string;
   content: string;
-  authorName: string;
+  author_name: string;
   password: string;
-  updatedAt?: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 const Board: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [showCreatePost, setShowCreatePost] = useState<boolean>(false);
-  const [editingPostId, setEditingPostId] = useState<string | null>(null);
-  const [editTitle, setEditTitle] = useState<string>('');
-  const [editContent, setEditContent] = useState<string>('');
+  const [showCreate, setShowCreate] = useState(false);
+  const [editingId, setEditingId] = useState<number | null>(null);
+  const [editTitle, setEditTitle] = useState("");
+  const [editContent, setEditContent] = useState("");
 
-  //페이지네이션
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const postsPerPage = 9;
+  const [newPost, setNewPost] = useState({
+    title: "",
+    content: "",
+    author_name: "",
+    password: "",
+  });
+
+  const fetchPosts = async () => {
+    const res = await axios.get("http://localhost:8000/posts");
+    setPosts(res.data);
+  };
 
   useEffect(() => {
-    const q = query(collection(db, "posts"));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const postsArray: Post[] = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...(doc.data() as Omit<Post, "id">),
-      }));
-      setPosts(postsArray);
-    });
-    return () => unsubscribe();
+    fetchPosts();
   }, []);
 
-  const handleDelete = async (postId: string) => {
-    const password = prompt("게시글의 비밀번호를 입력하세요:");
-    const post = posts.find((post) => post.id === postId);
-
-    if (post && post.password === password) {
-      try {
-        await deleteDoc(doc(db, "posts", postId));
-        alert("게시글이 삭제되었습니다.");
-      } catch (e) {
-        console.error("Error deleting document: ", e);
-      }
-    } else {
-      alert("비밀번호가 일치하지 않습니다.");
+  const handleDelete = async (id: number) => {
+    const password = prompt("비밀번호를 입력하세요");
+    if (!password) return;
+    try {
+      await axios.delete(`http://localhost:8000/posts/${id}`, {
+        data: { password },
+      });
+      fetchPosts();
+    } catch (err) {
+      alert("삭제 실패: 비밀번호 불일치 또는 서버 오류");
     }
   };
 
-  const enableEditMode = (post: Post) => {
-    setEditingPostId(post.id);
+  const enableEdit = (post: Post) => {
+    setEditingId(post.id);
     setEditTitle(post.title);
     setEditContent(post.content);
   };
 
   const handleUpdate = async () => {
-    if (!editTitle || !editContent) {
-      alert("제목과 내용을 입력해주세요.");
-      return;
-    }
-
-    const password = prompt("게시글의 비밀번호를 입력하세요:");
-    const post = posts.find((post) => post.id === editingPostId);
-
-    if (post && post.password === password) {
-      try {
-        if (editingPostId) {
-          const postRef = doc(db, "posts", editingPostId);
-          await updateDoc(postRef, {
-            title: editTitle,
-            content: editContent,
-            updatedAt: new Date().toISOString(),
-          });
-
-          alert("게시글이 수정되었습니다.");
-          setEditingPostId(null);
-        }
-      } catch (e) {
-        console.error("Error updating document: ", e);
-      }
-    } else {
-      alert("비밀번호가 일치하지 않습니다.");
+    const password = prompt("비밀번호를 입력하세요");
+    if (!password || editingId === null) return;
+    try {
+      await axios.put(`http://localhost:8000/posts/${editingId}`, {
+        title: editTitle,
+        content: editContent,
+        password,
+      });
+      setEditingId(null);
+      fetchPosts();
+    } catch (err) {
+      alert("수정 실패: 비밀번호 불일치 또는 서버 오류");
     }
   };
 
-  // 현재 페이지의 게시글 가져오기
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-
-  // 총 페이지 수 계산
-  const totalPages = Math.ceil(posts.length / postsPerPage);
-
-  // 페이지 변경 핸들러
-  const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
+  const handleCreate = async () => {
+    const { title, content, author_name, password } = newPost;
+    if (!title || !content || !author_name || !password) {
+      alert("모든 항목을 입력해주세요.");
+      return;
+    }
+    try {
+      await axios.post("http://localhost:8000/posts", newPost);
+      setNewPost({ title: "", content: "", author_name: "", password: "" });
+      setShowCreate(false);
+      fetchPosts();
+    } catch (err) {
+      alert("작성 실패");
+    }
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <ProfileCss>
-        <div className="profileWrap boardContainer">
-          <h3 className="profileH3">메모장</h3>
-          <div className="boardSection">
-            <p className="title">
-              Firebase DB를 사용한 게시판CRUD 구현입니다.
-              <button
-                className="writeBtn button-13"
-                onClick={() => setShowCreatePost((prev) => !prev)}
-              >
-                {showCreatePost ? "취소" : "글쓰기"}
-              </button>
-            </p>
-            <div className="writeWrap">
-              {showCreatePost && <CreatePost onCancel={() => setShowCreatePost(false)} />}
-            </div>
+    <div className="p-6 max-w-3xl mx-auto text-gray-800">
+      <h1 className="text-3xl font-bold text-center mb-8">CRUD구현 : FastAPI + SQLite</h1>
 
-            <div className="listWrap">
-              {currentPosts.map((post) => (
-                <div
-                  key={post.id}
-                  className="boardList"
-                  style={{ padding: "10px", margin: "16px 0" }}
-                >
-                  {editingPostId === post.id ? (
-                    <div className="editInput">
-                      <input
-                        type="text"
-                        value={editTitle}
-                        onChange={(e) => setEditTitle(e.target.value)}
-                        placeholder="제목을 입력하세요"
-                      />
-                      <textarea
-                        value={editContent}
-                        onChange={(e) => setEditContent(e.target.value)}
-                        placeholder="내용을 입력하세요"
-                      ></textarea>
-                      <button onClick={handleUpdate} style={{ marginRight: "8px" }}>
-                        저장
-                      </button>
-                      <button onClick={() => setEditingPostId(null)}>취소</button>
-                    </div>
-                  ) : (
-                    <Fragment>
-                      <h2>{post.title}</h2>
-                      <div className="postInfo">
-                        <span>작성자: {post.authorName}</span>
-                        <div>
-                          <button
-                            onClick={() => handleDelete(post.id)}
-                            style={{ marginRight: "8px" }}
-                          >
-                            삭제
-                          </button>
-                          <button type="button" onClick={() => enableEditMode(post)}>
-                            수정
-                          </button>
-                        </div>
-                      </div>
-                      <p>{post.content}</p>
-                    </Fragment>
-                  )}
-                </div>
-              ))}
-            </div>
+      <div className="mb-8">
+        <button
+          onClick={() => setShowCreate(!showCreate)}
+          className="bg-green-500 hover:bg-green-600 text-white font-medium px-6 py-2 rounded shadow"
+        >
+          {showCreate ? "작성 취소" : "글쓰기"}
+        </button>
 
-            {/* 페이지네이션 버튼 */}
-            <Pagination>
-              <button disabled={currentPage === 1} onClick={() => handlePageChange(currentPage - 1)}>
-                이전
-              </button>
-              {[...Array(totalPages)].map((_, index) => (
-                <button
-                  key={index + 1}
-                  onClick={() => handlePageChange(index + 1)}
-                  className={currentPage === index + 1 ? "active" : ""}
-                >
-                  {index + 1}
-                </button>
-              ))}
-              <button
-                disabled={currentPage === totalPages}
-                onClick={() => handlePageChange(currentPage + 1)}
-              >
-                다음
-              </button>
-            </Pagination>
+        {showCreate && (
+          <div className="mt-6 bg-white p-6 rounded shadow-md space-y-4 border border-gray-200">
+            <input
+              type="text"
+              placeholder="제목"
+              value={newPost.title}
+              onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
+              className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring"
+            />
+            <textarea
+              placeholder="내용"
+              value={newPost.content}
+              onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
+              className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring h-32"
+            />
+            <input
+              type="text"
+              placeholder="작성자"
+              value={newPost.author_name}
+              onChange={(e) => setNewPost({ ...newPost, author_name: e.target.value })}
+              className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring"
+            />
+            <input
+              type="password"
+              placeholder="비밀번호"
+              value={newPost.password}
+              onChange={(e) => setNewPost({ ...newPost, password: e.target.value })}
+              className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring"
+            />
+            <button
+              onClick={handleCreate}
+              className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded shadow"
+            >
+              작성하기
+            </button>
           </div>
-        </div>
-      </ProfileCss>
-    </ThemeProvider>
+        )}
+      </div>
+
+      <div className="space-y-6">
+        {posts.map((post) => (
+          <div key={post.id} className="p-5 bg-white border border-gray-200 rounded shadow">
+            {editingId === post.id ? (
+              <div className="space-y-3">
+                <input
+                  type="text"
+                  value={editTitle}
+                  onChange={(e) => setEditTitle(e.target.value)}
+                  className="w-full border border-gray-300 px-3 py-2 rounded"
+                  placeholder="제목"
+                />
+                <textarea
+                  value={editContent}
+                  onChange={(e) => setEditContent(e.target.value)}
+                  className="w-full border border-gray-300 px-3 py-2 rounded h-24"
+                  placeholder="내용"
+                />
+                <div className="flex gap-2 justify-end">
+                  <button
+                    onClick={handleUpdate}
+                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded"
+                  >
+                    저장
+                  </button>
+                  <button
+                    onClick={() => setEditingId(null)}
+                    className="bg-gray-300 hover:bg-gray-400 px-4 py-1 rounded"
+                  >
+                    취소
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <Fragment>
+                <h2 className="text-xl font-semibold">{post.title}</h2>
+                <p className="text-sm text-gray-500 mb-2">작성자: {post.author_name}</p>
+                <p className="text-gray-700 whitespace-pre-line">{post.content}</p>
+                <div className="mt-4 flex gap-2 justify-end">
+                  <button
+                    onClick={() => enableEdit(post)}
+                    className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-1 rounded"
+                  >
+                    수정
+                  </button>
+                  <button
+                    onClick={() => handleDelete(post.id)}
+                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded"
+                  >
+                    삭제
+                  </button>
+                </div>
+              </Fragment>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
 export default Board;
-
-const ProfileCss = styled.div`
-  width: 100%;
-  color: #333;
-  padding-top: 56px;
-`;
-
-const Pagination = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-
-  button {
-    margin: 0 4px;
-    padding: 5px 10px;
-    border: none;
-    background-color: #eee;
-    cursor: pointer;
-    color: #333;
-    border-radius: 0px;
-
-    &.active {
-      background-color: #007bff;
-      color: white;
-    }
-
-    &:disabled {
-      cursor: not-allowed;
-    }
-  }
-`;
